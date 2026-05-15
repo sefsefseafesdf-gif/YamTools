@@ -19,41 +19,41 @@ local function value_to_string(v)
     return tostring(v)
 end
 
-local function antiaim_builder()
+local function AA_builder()
 
-    local antiaim = {
+    local AA = {
         enabled =
-            ui.get("antiaim", "Anti-aimbot angles", "Enabled"),
+            ui.get("AA", "Anti-aimbot angles", "Enabled"),
 
         pitch =
-            ui.get("antiaim", "Anti-aimbot angles", "Pitch"),
+            ui.get("AA", "Anti-aimbot angles", "Pitch"),
 
         yaw_base =
-            ui.get("antiaim", "Anti-aimbot angles", "Yaw base"),
+            ui.get("AA", "Anti-aimbot angles", "Yaw base"),
 
         yaw =
-            ui.get("antiaim", "Anti-aimbot angles", "Yaw"),
+            ui.get("AA", "Anti-aimbot angles", "Yaw"),
 
         yaw_jitter =
-            ui.get("antiaim", "Anti-aimbot angles", "Yaw jitter"),
+            ui.get("AA", "Anti-aimbot angles", "Yaw jitter"),
 
         body_yaw =
-            ui.get("antiaim", "Anti-aimbot angles", "Body yaw"),
+            ui.get("AA", "Anti-aimbot angles", "Body yaw"),
 
         freestanding_body_yaw =
-            ui.get("antiaim", "Anti-aimbot angles", "Freestanding body yaw"),
+            ui.get("AA", "Anti-aimbot angles", "Freestanding body yaw"),
 
         edge_yaw =
-            ui.get("antiaim", "Anti-aimbot angles", "Edge yaw"),
+            ui.get("AA", "Anti-aimbot angles", "Edge yaw"),
 
         freestanding =
-            ui.get("antiaim", "Anti-aimbot angles", "Freestanding"),
+            ui.get("AA", "Anti-aimbot angles", "Freestanding"),
 
         roll =
-            ui.get("antiaim", "Anti-aimbot angles", "Roll"),
+            ui.get("AA", "Anti-aimbot angles", "Roll"),
     }
 
-    return antiaim
+    return AA
 end
 
 local function main()
@@ -65,7 +65,7 @@ local function main()
         yamtools.author
     )
 
-    local aa = antiaim_builder()
+    local aa = AA_builder()
 
     for key, value in pairs(aa) do
         client.log(
