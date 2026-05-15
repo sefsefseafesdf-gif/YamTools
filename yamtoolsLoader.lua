@@ -3,13 +3,6 @@ local files = {
     "yamtools.lua",
 }
 
-local function main()
-    loadLua(repo .. "loader.lua")
-    for _, file in ipairs(files) do
-        loadLua(repo .. file)
-    end
-end
-
 local function loadLua(url)
     local success, err = pcall(function()
         loadstring(game:HttpGet(url))()
@@ -20,5 +13,14 @@ local function loadLua(url)
         print("Successfully loaded " .. url)
     end
 end
+
+local function main()
+    loadLua(repo .. "loader.lua")
+    for _, file in ipairs(files) do
+        loadLua(repo .. file)
+    end
+end
+
+
 
 main()
