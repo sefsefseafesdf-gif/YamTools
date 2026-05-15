@@ -1,54 +1,36 @@
-local repo =
-    "https://raw.githubusercontent.com/ExcessiveAmountsOfYam/YamTools/main/"
+local http = require("gamesense/http")
 
-local files = {
-    "yamtools.lua",
-}
+http.get(
+    "https://raw.githubusercontent.com/sefsefseafesdf-gif/YamTools/refs/heads/main/yamtools.lua",
 
-local function loadLua(url)
+    function(success, response)
 
-    local success, err =
-        pcall(function()
+        if not success or not response then
+            client.log("Failed to fetch lua")
+            return
+        end
 
-            local source =
-                game:HttpGet(url)
+        local body =
+            response.body or response
 
-            local chunk =
-                loadstring(source)
+        local chunk, err =
+            loadstring(body)
 
-            if not chunk then
-                error("loadstring failed")
-            end
+        if not chunk then
+            client.log("Compile error: " .. tostring(err))
+            client.log(body:sub(1, 120))
+            return
+        end
 
-            chunk()
+        local ok, runtime_err =
+            pcall(chunk)
 
-        end)
+        if not ok then
+            client.log("Runtime error: " .. tostring(runtime_err))
+            return
+        end
 
-    if not success then
-
-        client.log(
-            "Failed to load " ..
-            url ..
-            ": " ..
-            tostring(err)
-        )
-
-    else
-
-        client.log(
-            "Loaded: " .. url
-        )
+        client.log("YamTools loaded")
 
     end
-
-end
-
-local function main()
-
-    for _, file in ipairs(files) do
-        loadLua(repo .. file)
-    end
-
-end
-
-main()
+)
