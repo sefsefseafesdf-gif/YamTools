@@ -21,6 +21,7 @@ end
 
 local function main()
     client.log("YamTools " .. yamtools.version .. " by " .. yamtools.author)
+    antiaim_builder()
 end
 
 main()
