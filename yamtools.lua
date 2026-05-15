@@ -3,25 +3,78 @@ local yamtools = {
     author = "yam-ka",
 }
 
+local function value_to_string(v)
+    local t = type(v)
+
+    if t == "table" then
+        local out = {}
+
+        for i = 1, #v do
+            out[#out + 1] = tostring(v[i])
+        end
+
+        return table.concat(out, ", ")
+    end
+
+    return tostring(v)
+end
+
 local function antiaim_builder()
-    local antaim = {
-        ui.get("antiaim", "Anti-aimbot angles", "Enabled"),
-        ui.get("antiaim", "Anti-aimbot angles", "Pitch"),
-        ui.get("antiaim", "Anti-aimbot angles", "Yaw Base"),
-        ui.get("antiaim", "Anti-aimbot angles", "Yaw"),
-        ui.get ("antiaim", "Anti-aimbot angles", "Yaw jitter"),
-        ui.get("antiaim", "Anti-aimbot angles", "Body yaw"),
-        ui.get("antiaim", "Anti-aimbot angles", "Freestanding body yaw"),
-        ui.get("antiaim", "Anti-aimbot angles", "Edge yaw"),
-        ui.get("antiaim", "Anti-aimbot angles", "Freestanding"),
-        ui.get("antiaim", "Anti-aimbot angles", "Roll"),
+
+    local antiaim = {
+        enabled =
+            ui.get("antiaim", "Anti-aimbot angles", "Enabled"),
+
+        pitch =
+            ui.get("antiaim", "Anti-aimbot angles", "Pitch"),
+
+        yaw_base =
+            ui.get("antiaim", "Anti-aimbot angles", "Yaw base"),
+
+        yaw =
+            ui.get("antiaim", "Anti-aimbot angles", "Yaw"),
+
+        yaw_jitter =
+            ui.get("antiaim", "Anti-aimbot angles", "Yaw jitter"),
+
+        body_yaw =
+            ui.get("antiaim", "Anti-aimbot angles", "Body yaw"),
+
+        freestanding_body_yaw =
+            ui.get("antiaim", "Anti-aimbot angles", "Freestanding body yaw"),
+
+        edge_yaw =
+            ui.get("antiaim", "Anti-aimbot angles", "Edge yaw"),
+
+        freestanding =
+            ui.get("antiaim", "Anti-aimbot angles", "Freestanding"),
+
+        roll =
+            ui.get("antiaim", "Anti-aimbot angles", "Roll"),
     }
-    return antaim
+
+    return antiaim
 end
 
 local function main()
-    client.log("YamTools " .. yamtools.version .. " by " .. yamtools.author)
-    antiaim_builder()
+
+    client.log(
+        "YamTools " ..
+        yamtools.version ..
+        " by " ..
+        yamtools.author
+    )
+
+    local aa = antiaim_builder()
+
+    for key, value in pairs(aa) do
+        client.log(
+            key ..
+            " = " ..
+            value_to_string(value)
+        )
+    end
+
 end
 
 main()
